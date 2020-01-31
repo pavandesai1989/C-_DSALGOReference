@@ -1,0 +1,104 @@
+#include <iostream> 
+using namespace std;
+
+/* node structure for DLL*/
+class node
+{
+public:
+  int data;
+  node* next;
+  node* prev;
+
+public:
+  node(int d):data(d),next(nullptr),prev(nullptr)  {
+  }
+};
+
+/* insert node at the begin of DLL*/
+void InsertAtHeadDLL(node*& head,int data)
+{
+  if(!head)
+  {
+    head = new node(data);
+    return;
+  }
+  else
+  {
+    node* newnode = new node(data);
+    newnode->next = head;
+    head->prev = newnode;
+    head = newnode;
+  }
+}
+
+/* insert node at the tail of the DLL*/
+void InsertAtTailDLL(node*& head,int data)
+{
+  if(!head)
+  {
+    head = new node(data);
+    return;
+  }
+  else
+  {
+    node* newnode = new node(data);
+    node* temp = head;
+
+    while(temp->next!=NULL)
+      temp = temp->next;
+
+    temp->next = newnode;
+    newnode->prev = temp;
+  }
+}
+
+/*Display DLL*/
+void displayDLL(node*& head)
+{
+  node* temp = head;
+
+  while(temp!=NULL)
+  {
+    cout<<temp->data<<"  ";
+    temp = temp->next;
+  }
+}
+
+/* delete at tail of the DLL*/
+void DeleteAttailDD(node*& head)
+{
+  if(!head)
+  {
+    cout<<"Empty List!!!!!"<<endl;
+    return;
+  }
+  
+  node* temp = head;
+  while(temp->next!=NULL)
+    temp = temp->next;
+
+
+  temp->prev->next = NULL;
+  delete temp;
+}
+
+
+
+int main() 
+{ 
+  node * head = nullptr;
+
+  InsertAtTailDLL(head,1);
+  InsertAtTailDLL(head,3);
+  InsertAtTailDLL(head,5);
+  InsertAtTailDLL(head,7);
+
+  displayDLL(head);
+  cout<<endl<<endl;
+
+  DeleteAttailDD(head);
+
+  displayDLL(head);
+
+  return 0; 
+}
