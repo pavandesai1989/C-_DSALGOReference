@@ -1,0 +1,63 @@
+/*****************************Strings**************************************/
+
+/************************************Swap 2 strings**********************************/
+#include<iostream>
+#include<string>
+using namespace std;
+void swap(string*& str1,string *& str2)
+{
+    string *temp;
+    temp = str1;
+    str1 = str2;
+    str2 = temp;
+}
+int main()
+{
+    string str1 = "pavan";
+    string str2 = "desai";    
+    swap(str1,str2);    
+    cout<<"1 is "<<str1<<endl;
+    cout<<"2 is "<<str2<<endl;
+    return 0;
+}
+
+/************************Program to Check if a Given String is Palindrome*******************************/
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+bool IsPalindrome(string str)
+{
+  int start = 0;
+  int end = str.length()-1;
+  while(end>start)
+  {
+    if(str[start++] != str[end--])
+       return false;
+  }
+  return true;
+}
+
+int main()
+{
+  string str = "ACA";
+  cout<<IsPalindrome(str);
+
+  return 0;
+}
+/***********************************Program for Return maximum occurring character in the input string**************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
