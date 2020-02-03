@@ -1,3 +1,16 @@
+/*****************Advantages of Doubly Link List*****************************/
+DOUBLY LINKED LIST: A Doubly Linked List (DLL) contains an extra pointer, typically called previous pointer, together with next pointer and data which are there in singly linked list.
+Advantages over singly linked list 
+1) A DLL can be traversed in both forward and backward direction. 
+2) The delete operation in DLL is more efficient if pointer to the node to be deleted is given. 
+3) We can quickly insert a new node before a given node. In singly linked list, to delete a node, pointer to the previous
+   node is needed. To get this previous node, sometimes the list is traversed. In DLL, we can get the previous node using 
+   previous pointer.
+   
+ /**************Iterators in DLL**************************/
+ Bidirectional iterator
+
+
 #include <iostream> 
 using namespace std;
 
@@ -82,7 +95,84 @@ void DeleteAttailDD(node*& head)
   delete temp;
 }
 
+/*Delete at head of the DLL*/
+void DeleteAtHead(node*& head)
+{
+  if(!head)
+  {
+    cout<<"Empty list!!!!!!!!!!!!!!!!!"<<endl;
+    return;
+  }
 
+  node* temp = head;
+  head = head->next;
+  head->prev = NULL;
+
+  delete temp;
+}
+
+/* delete at given position in DLL*/
+void DeleteAtgivenPosition(node*&head,int pos)
+{
+  node* temp = head;
+  int jumps=1;
+
+  if(pos == 1)
+  {
+    DeleteAtHead(head);
+    return;
+  }
+
+  while(jumps<=(pos-1))
+  {
+    temp = temp->next;
+    jumps++;
+  }
+
+  temp->prev->next = temp->next;
+  temp->next = temp->prev = NULL;
+  delete temp;
+}
+
+/* print reverse DLL*/
+void PrintReverse(node*& head)
+{
+  node* temp = head;
+
+  while(temp->next!=NULL)
+    temp = temp->next;
+
+  while(temp!=NULL)
+  {
+    cout<<temp->data;
+
+    if(temp->prev == NULL)
+      cout<<endl;
+    else
+      cout<<"<---";
+    temp = temp->prev;
+  }
+}
+
+/* insert node after a given position in DLL*/
+void InsertAtGivenPosition(node*& head,int data,int pos)
+{
+  node* temp = head;
+  int jumps=1;
+
+  while(jumps<=(pos-1))
+  {
+    temp = temp->next;
+    jumps++;
+  }
+
+  node* new_node = new node(data);
+  new_node->next = temp->next;
+  temp->next->prev = new_node;
+
+  new_node->prev = temp;
+  temp->next = new_node;
+}
 
 int main() 
 { 
