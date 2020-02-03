@@ -1,0 +1,144 @@
+/*******************Iterators**********************************/
+An iterator is an object (like a pointer) that points to an element inside the container. We can use iterators to move through 
+the contents of the container. They can be visualised as something similar to a pointer pointing to some location and we can 
+access content at that particular location using them.
+
+Iterators play a critical role in connecting algorithm with containers along with the manipulation of data stored inside the 
+containers.
+
+Depending upon the functionality of iterators they can be classified into five categories, as shown in the diagram below with the 
+outer one being the most powerful one and consequently the inner one is the least powerful in terms of functionality.
+
+Random access iterator
+Bidirectional
+Forward
+input iterator
+outpur iterator
+
+
+VVVVVIMP
+Container                    Types of Iterators Supported
+Vector------>Random access iterator
+List-------->Bidirectional
+deque-------->Random access iterator
+map,multimap,set,multiset----->birectional iterator
+stack,queue,priority queue   -->NO ITERATORS SUPPORTED
+
+
+/*********************Types of iterators*************************/
+Types of iterators: Based upon the functionality of the iterators, they can be classified into five major categories:
+
+1) Input Iterators:  (Only for access and increment in single pass algorithms)
+They are the weakest of all the iterators and have very limited functionality. 
+They can only be used in a single-pass algorithms, i.e., those algorithms which process the container sequentially such
+that no element is accessed more than once.
+ Input iterators can be used only with single-pass algorithms, i.e., algorithms in which we can go to all the locations 
+ in the range at most once, like when we have to search or find any element in the range, we go through the locations at most 
+ once
+ 
+ Applications of Input Iterators-------
+ std::find: As we know this algorithm is used to find the presence of an element inside a container. 
+ So, let us look at its internal working (Donot go into detail just look where input iterators can be used and where they
+ cannot be):
+ <strong>// Definition of std::find()</strong> 
+template 
+InputIterator find (InputIterator first, InputIterator last,  
+                    const T& val) 
+{ 
+    while (first!=last)  
+    { 
+        if (*first==val) return first; 
+        ++first; 
+    } 
+    return last; 
+}
+
+std::copy: As the name suggests, this algorithm is used to copy a range into another range. Now, as far as 
+accessing elements are concerned, input iterators are fine, but as soon as we have to assign elements in another container,
+then we cannot use these input iterators for this purpose.
+
+<strong>// Definition of std::copy()</strong> 
+template 
+OutputIterator copy(InputIterator first, InputIterator last, 
+                    OutputIterator result)  
+{ 
+    while (first != last)  
+    *result++ = *first++; 
+    return result; 
+}
+
+Here, since the result is the iterator to the resultant container, to which elements are assigned, so for this, we cannot 
+use input iterators and have made use of output iterators at their place, whereas for first, which only needs to be incremented 
+and accessed, we have used input iterator.
+
+//***** disadvantages****/
+Only for access and no assignment
+cannot decrmented
+Use in multi-pass algorithms: Since, it is unidirectional and can only move forward, therefore, such iterators 
+cannot be used in multi-pass algorithms, in which we need to process the container multiple times.
+ 
+ input and output iterators are complementary to each other
+
+2) Output Iterators: (They can be assigned values in a sequence, but cannot be used to access values)
+Just like input iterators, they are also very limited in their functionality and can only be used in 
+single-pass algorithm, but not for accessing elements, but for being assigned elements.
+
+disadvantages:
+Unlike input iterators, output iterators cannot be compared for equality with another iterator.
+Dereferencing: An input iterator can be dereferenced as an rvalue, using operator * and ->, whereas an output iterator can be dereferenced as an lvalue to 
+provide the location to store the value
+So, the following two expressions are valid if A is an output iterator:
+
+*A = 1      // Dereferencing using *
+A -> m = 7   // Assigning a member element m
+
+
+Applications:
+std::move: As the name suggests, this algorithm is used to move elements in a range into another range. Now, as far 
+as accessing elements are concerned, input iterators are fine, but as soon as we have to assign elements in another container,
+then we cannot use these input iterators for this purpose, that is why here using output iterators becomes a compulsion.
+
+OutputIterator move (InputIterator first, InputIterator last,
+                     OutputIterator result)
+                     
+
+3) Forward Iterator: (Forward iterators are considered to be the combination of input as well as output iterators.
+It provides support to the functionality of both of them. It permits values to be both accessed and modified)
+
+They are higher in hierarachy than input and output iterators, and contain all the features present in these 
+two iterators. But, as the name suggests, they also can only move in forward direction and that too one step at a time.
+
+advantages:
+So, it can be used in multi-pass algorithms
+A forward iterator can be compared for equality with another iterator. 
+Because an input iterator can be dereferenced, using the operator * and -> as an rvalue and an output iterator can
+be dereferenced as an lvalue, so forward iterators can be used for both the purpose
+
+Application:
+std::replace: As we know this algorithm is used to replace all the elements in the range which are equal to a particular value by a new value. So, let us look at its internal working (Don’t go into detail just look where forward iterators can be used and where they cannot be):
+// Definition of std::replace() 
+template void replace(ForwardIterator first, ForwardIterator last, 
+                      const T& old_value, const T& new_value) 
+{ 
+    while (first != last) { 
+        if (*first == old_value) // L1 
+            *first = new_value; // L2 
+        ++first; 
+    } 
+} 
+
+4) Bidirectional Iterators: They have all the features of forward iterators along with the fact that they overcome the drawback 
+of forward iterators, as they can move in both the directions, that is why their name is bidirectional.
+
+Bidirectional iterators are iterators that can be used to access the sequence of elements in a range in both directions 
+(towards the end and towards the beginning). They are similar to forward iterators, except that they can move in the backward 
+direction also, unlike the forward iterators, which can move only in the forward direction
+
+
+5) Random-Access Iterators: They are the most powerful iterators. They are not limited to moving sequentially, as their name 
+suggests, they can randomly access any element inside the container. They are the ones whose functionality is same as pointers.
+
+Random-access iterators are iterators that can be used to access elements at an arbitrary offset position relative
+to the element they point to, offering the same functionality as pointers. Random-access iterators are the most complete 
+iterators in terms of functionality. All pointer types are also valid random-access iterators.
+
