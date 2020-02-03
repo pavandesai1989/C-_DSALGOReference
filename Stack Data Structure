@@ -1,1 +1,86 @@
-/*Implement stack DS using Vector  */
+/**********What is stack?**************************************/ 
+Stack is a linear data structure which follows a particular order in which the operations are performed. 
+The order may be LIFO(Last In First Out) or FILO(First In Last Out).
+
+/**************************Applications of stack************************************/
+1. Expression Evaluation: Stack is used to evaluate prefix, postfix and infix expressions. 
+2. Expression Conversion:An expression can be represented in prefix, postfix or infix notation. 
+Stack can be used to convert one form of expression to another. 
+3. Parenthesis Checking:Stack is used to check the proper opening and closing of parenthesis. 
+4. String Reversal:Stack is used to reverse a string. We push the characters of string one by one into stack and then pop 
+character from stack. 
+5. Function Call:Stack is used to keep information about the active functions or subroutines.
+6. Backtracking ddddoooooooooooooooo:
+7. Redo-undo : features at many places like editors, photoshop.
+8. Page visited history in web browser.
+
+/********STL STACK  imp functions ******************************************/
+empty() – Returns whether the stack is empty – Time Complexity : O(1)
+size() – Returns the size of the stack – Time Complexity : O(1)
+top() – Returns a reference to the top most element of the stack – Time Complexity : O(1)
+push(g) – Adds the element ‘g’ at the top of the stack – Time Complexity : O(1)
+pop() – Deletes the top most element of the stack – Time Complexity : O(1)
+
+/**************************Implement stack using vectors*******************************/
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+
+template<typename T>
+class stack
+{
+private:
+  vector<T> v;
+
+public:
+  void push(T data)
+  {
+    v.push_back(data);
+  }
+
+  bool empty()
+  {
+    return v.size() == 0;
+  }
+
+  int size()const
+  {
+    return v.size();
+  }
+
+  void pop()
+  {
+    if(!empty())
+    {
+      v.pop_back();
+    }
+  }
+
+  T& top()
+  {
+    return v[v.size()-1];
+  }
+};
+
+
+int main()
+{
+  stack<string> mystack;
+  mystack.push("pavan");
+  mystack.push("desai");
+
+  cout<<"size of stack is "<<mystack.size()<<endl;
+
+  while(!mystack.empty())
+  {
+    cout<<mystack.top()<<endl;
+    mystack.pop();
+  }
+
+  return 0;
+}
+
+/******************************Stack implement using singly link list**********************/
+Use insertion and deletion at head as we need this operation in O(1) in stack.If we use insertion/deletion at tail it will 
+take o(n)
