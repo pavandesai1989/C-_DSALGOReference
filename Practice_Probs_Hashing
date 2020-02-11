@@ -42,7 +42,31 @@ int main()
 
 
 /*************************Union and Intersection of two Linked Lists********************************/
+node* Intersection( node* head1, node* head2)
+{
+  if(!head1 || (!head2))  return NULL;
+  node* L1 = head1;
+  node* L2 = head2;
 
+  node* intersection = NULL;
+  set<int>  myset;
+
+  //traverse first list and add in the set
+  while(L1!=NULL)
+  {
+     if(myset.find(L1->data) == myset.end())
+       myset.insert(L1->data);
+     L1 = L1->next;
+  }
+  //traverse second list and check for common intersction
+  while(L2!=NULL)
+  {
+     if(myset.find(L2->data) !=myset.end())
+       InsertAtHead(intersection,L2->data);
+     L2 = L2->next;
+  }
+  return intersection;
+}
 
 
 
