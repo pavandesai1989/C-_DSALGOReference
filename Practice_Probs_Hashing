@@ -1,0 +1,68 @@
+/**********Find whether an array is subset of another array*****************************/
+#include <iostream>
+#include<vector>
+#include<stack>
+#include<unordered_set>
+using namespace std;
+bool IsSubset(vector<int> vec1,vector<int> vec2)
+{
+  unordered_set<int>  myset;
+
+  for(int i=0;i<vec1.size();i++)
+  {
+    if(myset.find(vec1.at(i))== myset.end())
+         myset.insert(vec1.at(i));
+  }
+
+  //traverse 2nd vector
+  for(int i=0;i<vec2.size();i++)
+  {
+     if(myset.find(vec2.at(i)) == myset.end())
+       return false;
+  }
+  return true;
+}
+int main()
+{
+  vector<int> v1 ;
+  v1.push_back(1);
+  v1.push_back(2);
+  v1.push_back(3);
+  v1.push_back(4);
+  v1.push_back(15);
+
+  vector<int> v2;
+  v2.push_back(3);
+  v2.push_back(11);
+  v2.push_back(2);
+
+  cout<<IsSubset(v1,v2)<<endl;
+  return 0;
+}
+
+
+/*************************Union and Intersection of two Linked Lists********************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
