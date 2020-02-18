@@ -49,3 +49,251 @@ int main()
 
 
 /*************************Implement two stacks in an array***********************************/
+
+
+
+
+
+
+
+
+
+/*********************** reverse string using stack****************************/
+#include<iostream>
+#include<stack>
+#include<string>
+
+using namespace std;
+
+string reversefun (string str)
+{
+	string result;
+	stack<char> s;
+	int i=0;
+
+	while(i<str.length())
+	{
+		s.push(str[i]);
+	    i++;
+	}
+    
+	while(!s.empty())
+	{
+		result.push_back(s.top());
+		s.pop();
+	}
+
+	return result;
+}
+
+int main()
+{
+	string reverse = reversefun("Pavan");
+
+
+	cout<<"reverse is "<<reverse<<endl;
+	return 0;
+}
+
+/******************************Evaluate postfix **************************************
+#include<iostream>
+#include<string>
+#include<stack>
+
+using namespace std;
+
+bool IsNumericDigit(char ch)
+{
+	if(ch>='0' && ch<='9')
+		return true;
+	else
+		return false;
+}
+
+bool IsOperand(char ch)
+{
+	if( ch=='+' || ch=='-' || ch=='*' || ch=='/')
+		return true;
+	else
+		return false;
+}
+
+int PerformOperation(char ch,int op2,int op1)
+{
+	if(ch == '+') return op1+op2;
+	else if(ch == '-') return op1-op2;
+	else if(ch == '*') return op1*op2;
+	else if(ch == '/') return op1/op2;
+
+	return -1;
+}
+ 
+int evaluatePostfix(string exp)  
+{  
+    stack<int> s;
+
+	for(int i=0;i<exp.length();i++)
+	{
+		if(IsNumericDigit(exp[i]))
+		{
+			s.push(exp[i]-'0');
+		}
+		else if(IsOperand(exp[i]))
+		{
+			int op2 = s.top();
+			s.pop();
+			int op1 = s.top();
+			s.pop();
+
+			int result = PerformOperation(exp[i],op2,op1);
+			s.push(result);
+		}
+	}
+
+	return s.top();
+} 
+
+
+
+int main()
+{
+	cout<<evaluatePostfix("23*54*+9-")<<endl;
+	return 0;
+}
+/********************************Next grater ele using stack***************************************************/
+#include<iostream>
+#include<stack>
+
+using namespace std;
+
+void NExtGraterElement(int a[],int n)
+{
+	stack<int>  S;
+
+	S.push(a[0]);
+
+	for(int i=1;i<n;i++)
+	{
+		while( !S.empty() && a[i]>S.top())
+		{
+			cout<<S.top()<<"--->"<<a[i]<<endl;
+			S.pop();
+		}
+			S.push(a[i]);
+	}
+
+	while(!S.empty())
+	{
+		cout<<S.top()<<"--->"<<-1<<endl;
+		S.pop();
+	}
+}
+
+
+int main()
+{
+	int a[] = {5,3,2,10,6,8,1,4,12,7,4};
+
+	NExtGraterElement(a,11);
+	return 0;
+}
+
+/***************************Implement stack using lin list in o(1) Use insert and delete at head********************************/
+#include<iostream>
+using namespace std;
+
+
+class node
+{
+public:
+	node* next;
+	int data;
+
+public:
+	node(int data):next(nullptr),data(data){
+	}
+};
+
+
+class mystack
+{
+private:
+	node* head;
+
+public:
+	mystack():head(nullptr){
+	}
+
+	void push(int data)
+	{
+		if(!head)
+		{
+			head = new node(data);
+			return;
+		}
+		else
+		{
+			//insert node at the head of the link list!!!!!
+			node* n = new node(data);
+			n->next = head;
+			head = n;
+		}
+	}
+
+	void pop()
+	{
+		if(!isempty())
+		{
+			node* temp = head;
+			head = head->next;
+			delete temp;
+		}
+		else
+		{
+			cout<<"empty"<<endl;
+		}
+
+	}
+
+	int top()
+	{
+		if(head)
+			return head->data;
+		else
+			return -1;
+	}
+
+	bool isempty()
+	{
+		return (head == nullptr);
+	}
+
+	void print()
+	{
+		node* temp = head;
+		while(temp!=nullptr)
+		{
+			cout<<temp->data<<" ";
+			temp = temp->next;
+		}
+	}
+};
+
+
+int main()
+{
+	mystack  s;
+	s.push(1);
+	s.push(2);
+	s.push(3);
+
+	s.print();
+	s.pop();
+	cout<<endl<<endl;
+
+	s.print();
+
+	return 0;
+}
+/*****************************************************************************************************************/
+
