@@ -198,7 +198,7 @@ int main()
 	return 0;
 }
 
-/***************************Implement stack using lin list in o(1) Use insert and delete at head********************************/
+/***************************Implement stack using link list in o(1) Use insert and delete at head********************************/
 #include<iostream>
 using namespace std;
 
@@ -295,5 +295,9 @@ int main()
 
 	return 0;
 }
-/*****************************************************************************************************************/
+/**************************************Reverse individual words***************************************************************************/
+
+
+/*********************Get minimum ele in stack in O(1)***********************************************/
+
 
