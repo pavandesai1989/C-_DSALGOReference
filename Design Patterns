@@ -224,7 +224,117 @@ Output:
 I am three wheeler
 
 
+/*****************************Abstract Factory******************************************************/
+#include<iostream>
+using namespace std;
 
+
+class productA
+{
+public:
+	virtual char* getname() = 0;
+	virtual ~productA(){}
+};
+
+class productAx:public productA
+{
+public:
+	char* getname()
+	{
+		return "product Ax";
+	}
+	virtual ~productAx(){}
+};
+
+class productAy:public productA
+{
+public:
+	char* getname()
+	{
+		return "product Ay";
+	}
+	virtual ~productAy(){}
+};
+
+
+class productB
+{
+public:
+	virtual char* getname() = 0;
+	virtual ~productB(){}
+};
+
+class productBx:public productB
+{
+public:
+	char* getname()
+	{
+		return "product Bx";
+	}
+	virtual ~productBx(){}
+};
+
+class productBy:public productB
+{
+public:
+	char* getname()
+	{
+		return "product By";
+	}
+	virtual ~productBy(){}
+};
+
+
+class abstractfactory 
+{
+public:
+	virtual productA* createA() = 0;
+	virtual productB* createB() = 0;
+};
+
+
+class concreteAx:public abstractfactory
+{
+public:
+	productA* createA()
+	{
+		return new productAx();
+	}
+	productB* createB()
+	{
+		return new productBx();
+	}
+};
+
+class concreteAy:public abstractfactory
+{
+public:
+	productA* createA()
+	{
+		return new productAy();
+	}
+	productB* createB()
+	{
+		return new productBy();
+	}
+};
+
+
+int main()
+{
+	concreteAx *pProductX = new concreteAx();
+
+	productA *pProA = pProductX->createA();
+	cout<<pProA->getname()<<endl;
+
+	productB *pProB = pProductX->createB();
+	cout<<pProB->getname();
+
+	return 0;
+}
+
+
+/**********************************************Adaptor*******************************************/
 
 
 
