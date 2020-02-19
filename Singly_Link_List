@@ -1,1 +1,93 @@
 
+/*******************Reverse Singly Link List***************************************************************/
+void reverseLL(node*& head)
+{
+	if(!head)
+		return;
+
+	node* C = head;
+	node* P = NULL;
+	node* N = NULL;
+
+	while(C!=NULL)
+	{
+		//store the next node
+		N = C->next;
+		//make current point to prev
+		C->next = P;
+		//update current to prev
+		P = C;
+		//update next to current
+		C = N;
+	}
+	head = P;
+}
+
+/********************Reverse LL using stack***********************************************************************/
+void ReverseSLLUsingStack(node*& head)
+{
+	node* temp = head;
+	stack<node*> mystack;
+
+	while(temp!=nullptr)
+	{
+		mystack.push(temp);
+		temp = temp->next;
+	}
+
+	temp = mystack.top();
+	mystack.pop();
+	head = temp;
+
+	while(!mystack.empty())
+	{
+		temp->next = mystack.top();
+		mystack.pop();
+		temp = temp->next;
+	}
+	temp->next = NULL;
+}
+/***************************Find nth node from the end of the Link list, Efficient way*********************************************/
+int FindNthEndOfLL(node *head,int pos)
+{
+	node* pNthNode=NULL;
+	node* temp = head;
+
+	for(int i=1;i<pos;i++)
+	{
+		temp = temp->next;
+	}
+
+	while(temp!=NULL)
+	{
+		if(!pNthNode)
+			pNthNode = head;
+		else
+		    pNthNode = pNthNode->next;
+		temp = temp->next;
+	}
+	return pNthNode->data;
+}
+
+/******************************************************************************************************************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
